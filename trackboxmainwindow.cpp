@@ -2,7 +2,6 @@
 #include "ui_trackboxmainwindow.h"
 
 #include <QMouseEvent>
-#include <QDebug>
 
 trackboxMainWindow::trackboxMainWindow(QWidget *parent) :
     QWidget(parent),
@@ -46,7 +45,6 @@ void trackboxMainWindow::mouseMoveEvent(QMouseEvent *e) {
             geom.setRight(geom.right() + diff.x());
             break;
         case Moving:
-            qDebug() << "Moving";
             geom.moveTo(this->pos() + (e->pos() - m_MoveOffset));
             break;
         case IdleResize: {
