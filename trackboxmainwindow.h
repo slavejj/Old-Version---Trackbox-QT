@@ -8,26 +8,27 @@ class trackboxMainWindow;
 }
 
 class trackboxMainWindow : public QWidget {
-    Q_OBJECT
-    
-public:
-    explicit trackboxMainWindow(QWidget *parent = 0);
-    ~trackboxMainWindow();
-    
-    enum ResizeState { IdleResize, TopResize, BottomResize, LeftResize, RightResize};
+        Q_OBJECT
 
-protected:
-    virtual void mousePressEvent(QMouseEvent *e);
-    virtual void mouseMoveEvent(QMouseEvent *e);
-    virtual void mouseReleaseEvent(QMouseEvent *e);
+    public:
+        explicit trackboxMainWindow(QWidget *parent = 0);
+        ~trackboxMainWindow();
 
-    ResizeState getResizeState(const QPoint & pos) const;
+        enum ResizeState { IdleResize, Moving, TopResize, BottomResize, LeftResize, RightResize};
 
-    ResizeState m_ResizeState;
-    QPoint  m_ResizeOffset;
+    protected:
+        virtual void mousePressEvent(QMouseEvent *e);
+        virtual void mouseMoveEvent(QMouseEvent *e);
+        virtual void mouseReleaseEvent(QMouseEvent *e);
 
-private:
-    Ui::trackboxMainWindow *ui;
-};
+        ResizeState getResizeState(const QPoint & pos) const;
+
+        ResizeState m_ResizeState;
+        QPoint  m_ResizeOffset;
+        QPoint m_MoveOffset;
+
+    private:
+        Ui::trackboxMainWindow *ui;
+    };
 
 #endif // TRACKBOXMAINWINDOW_H
