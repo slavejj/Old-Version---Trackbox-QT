@@ -2,8 +2,7 @@ language: cpp
 compiler:
   - gcc
 before_install:
- - echo 'yes' | sudo add-apt-repository ppa:canonical-qt5-edgers/qt5-proper
- - sudo apt-get update -qq
+ - sudo apt-get update
  - sudo apt-get install -qq qtdeclarative5-dev
 before_script:
  - /usr/lib/x86_64-linux-gnu/qt5/bin/qmake Trackbox.pro -r -spec linux-g++
