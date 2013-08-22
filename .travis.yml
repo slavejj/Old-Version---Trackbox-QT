@@ -2,6 +2,7 @@ language: cpp
 compiler:
   - gcc
 before_install:
+ - echo 'yes' | sudo apt-add repository ppa:ubuntu-sdk-team/ppa
  - sudo apt-get update
  - sudo apt-get install -qq qtdeclarative5-dev
 before_script:
