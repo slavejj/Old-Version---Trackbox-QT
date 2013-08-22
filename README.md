@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/TrackboxFoundation/Trackbox.png)](https://travis-ci.org/TrackboxFoundation/Trackbox)
+[![Build Status](https://travis-ci.org/TrackboxFoundation/Trackbox.png?branch=master)](https://travis-ci.org/TrackboxFoundation/Trackbox)
 Trackbox
 ========
 
