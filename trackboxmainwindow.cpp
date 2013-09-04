@@ -32,8 +32,20 @@ void trackboxMainWindow::mouseMoveEvent(QMouseEvent *e) {
     switch (m_ResizeState) {
         default:
             break;
+        case TopLeftResize:
+            geom.setTopLeft(geom.topLeft() + diff);
+            break;
+        case TopRightResize:
+            geom.setTopRight(geom.topRight() + diff);
+            break;
         case TopResize:
             geom.setTop(geom.top() + diff.y());
+            break;
+        case BottomLeftResize:
+            geom.setBottomLeft(geom.bottomLeft() + diff);
+            break;
+        case BottomRightResize:
+            geom.setBottomRight(geom.bottomRight() + diff);
             break;
         case BottomResize:
             geom.setBottom(geom.bottom() + diff.y());
@@ -49,6 +61,14 @@ void trackboxMainWindow::mouseMoveEvent(QMouseEvent *e) {
             break;
         case IdleResize: {
             switch( this->getResizeState(e->pos()) ) {
+                case TopLeftResize:
+                case BottomRightResize:
+                    this->setCursor(Qt::SizeFDiagCursor);
+                    break;
+                case BottomLeftResize:
+                case TopRightResize:
+                    this->setCursor(Qt::SizeBDiagCursor);
+                    break;
                 case TopResize:
                 case BottomResize:
                     this->setCursor(Qt::SizeVerCursor);
@@ -83,7 +103,15 @@ trackboxMainWindow::ResizeState trackboxMainWindow::getResizeState(const QPoint 
     int resizeMargin = 10;
     QRect r = this->rect();
 
-    if( QRect(r.topLeft(),QPoint(r.right(),r.top()+resizeMargin)).contains(pos) )
+    if( QRect(r.topLeft(),QPoint(resizeMargin,r.top()+resizeMargin)).contains(pos) )
+        return TopLeftResize;
+    if( QRect(QPoint(r.right()-resizeMargin,r.top()+resizeMargin), r.topRight()).contains(pos) )
+        return TopRightResize;
+    if( QRect(r.bottomLeft(),QPoint(resizeMargin,resizeMargin)).contains(pos) )
+        return BottomLeftResize;
+    else if( QRect(QPoint(r.right()-resizeMargin, r.bottom()-resizeMargin),r.bottomRight()).contains(pos) )
+        return BottomRightResize;
+    else if( QRect(r.topLeft(),QPoint(r.right(),r.top()+resizeMargin)).contains(pos) )
         return TopResize;
     else if( QRect(QPoint(r.left(),r.bottom()-resizeMargin),r.bottomRight()).contains(pos) )
         return BottomResize;

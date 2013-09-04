@@ -14,7 +14,7 @@ class trackboxMainWindow : public QWidget {
         explicit trackboxMainWindow(QWidget *parent = 0);
         ~trackboxMainWindow();
 
-        enum ResizeState { IdleResize, Moving, TopResize, BottomResize, LeftResize, RightResize};
+        enum ResizeState { IdleResize, Moving, TopResize, BottomResize, LeftResize, RightResize, TopLeftResize, TopRightResize, BottomLeftResize, BottomRightResize};
 
     protected:
         virtual void mousePressEvent(QMouseEvent *e);
