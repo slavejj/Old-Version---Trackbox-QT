@@ -109,7 +109,7 @@ trackboxMainWindow::ResizeState trackboxMainWindow::getResizeState(const QPoint 
         return TopRightResize;
     else if( QRect(r.bottomLeft(),QPoint(resizeMargin,r.bottom() - resizeMargin)).contains(pos) )
         return BottomLeftResize;
-    else if( QRect(r.bottomRight(), QPoint(r.left()-resizeMargin, r.bottom()-resizeMargin)).contains(pos) )
+    else if( QRect(r.bottomRight(), QPoint(r.right()-resizeMargin, r.bottom()-resizeMargin)).contains(pos) )
         return BottomRightResize;
     else if( QRect(r.topLeft(),QPoint(r.right(),r.top()+resizeMargin)).contains(pos) )
         return TopResize;
