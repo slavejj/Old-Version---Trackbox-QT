@@ -2,12 +2,25 @@
 #include "ui_trackboxmainwindow.h"
 
 #include <QMouseEvent>
+#include <QPixmap>
+#include <QIcon>
+#include <QDebug>
+#include <QPainter>
+#include <QBitmap>
 
 trackboxMainWindow::trackboxMainWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::trackboxMainWindow) {
     ui->setupUi(this);
     this->setWindowFlags( Qt::FramelessWindowHint );
+
+    QPixmap closePixmap (":/trackbox/icons/close.png");
+    closePixmap = colorPixmap(closePixmap, QColor(0,0,0));
+
+    QIcon closeIcon(closePixmap);
+    ui->closeButton->setIcon(closeIcon);
+
+    connect ( ui->closeButton, SIGNAL( clicked() ), this, SLOT( closeButtonClicked() ) );
     }
 
 trackboxMainWindow::~trackboxMainWindow() {
@@ -99,6 +112,15 @@ void trackboxMainWindow::mouseReleaseEvent(QMouseEvent *e) {
     e->accept();
     }
 
+void trackboxMainWindow::resizeEvent(QResizeEvent *e) {
+    ui->closeButton->move(width() - ui->closeButton->width(), 0);
+    e->accept();
+    }
+
+void trackboxMainWindow::closeButtonClicked() {
+    exit(0);
+    }
+
 trackboxMainWindow::ResizeState trackboxMainWindow::getResizeState(const QPoint &pos) const {
     int resizeMargin = 10;
     QRect r = this->rect();
@@ -121,4 +143,21 @@ trackboxMainWindow::ResizeState trackboxMainWindow::getResizeState(const QPoint 
         return LeftResize;
     else
         return Moving;
+    }
+
+QPixmap trackboxMainWindow::colorPixmap(const QPixmap &pix, const QColor &color) {
+    QPixmap newPix(pix.size());
+    newPix.fill(Qt::transparent);
+    QBitmap mask=pix.createMaskFromColor(Qt::black,
+                                         Qt::MaskOutColor);
+    QPainter p(&newPix);
+    p.setRenderHint(QPainter::SmoothPixmapTransform);
+    p.setRenderHint(QPainter::Antialiasing);
+
+    p.setBackgroundMode(Qt::TransparentMode);
+    p.setPen(color);
+    p.drawPixmap(newPix.rect(),mask,pix.rect());
+    p.end();
+
+    return newPix;
     }

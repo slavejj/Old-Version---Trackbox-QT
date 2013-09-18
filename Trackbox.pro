@@ -4,9 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT       += core gui svg xml widgets
 
 TARGET = Trackbox
 TEMPLATE = app
@@ -18,3 +16,6 @@ SOURCES += main.cpp\
 HEADERS  += trackboxmainwindow.h
 
 FORMS    += trackboxmainwindow.ui
+
+RESOURCES += \
+    trackbox.qrc

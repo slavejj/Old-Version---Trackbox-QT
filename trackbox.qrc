@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/trackbox">
+        <file>icons/test.png</file>
+        <file>icons/window_close.svg</file>
+        <file>icons/close.png</file>
+    </qresource>
+</RCC>
