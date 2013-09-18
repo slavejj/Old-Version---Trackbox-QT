@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui svg xml widgets
+QT       += core gui widgets
 
 TARGET = Trackbox
 TEMPLATE = app
