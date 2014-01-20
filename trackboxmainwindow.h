@@ -10,7 +10,7 @@ class trackboxMainWindow;
 class trackboxMainWindow : public QWidget {
         Q_OBJECT
 
-    public:
+    public:iptvbg
         explicit trackboxMainWindow(QWidget *parent = 0);
         ~trackboxMainWindow();
 
